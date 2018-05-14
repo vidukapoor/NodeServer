@@ -2,32 +2,17 @@
  * @author vishwadeep.kapoor
  * @todo : logging service using {winston} need to be implemented
  */
-// import winston, { createLogger } from 'winston';
-// const { winston, createLogger, format, transports } = require('winston');
+import winston from 'winston';
 
-// const { combine, timestamp, label, prettyPrint } = format;
+const Logger = winston.Logger;
+
+const logger = new Logger({
+    transports: [
+        new (winston.transports.File)({ filename: 'console.log' }),
+    ],
+});
 
 
-// const logger = createLogger({
-//     format: combine(
-//         label({ label: 'right meow!' }),
-//         timestamp(),
-//         prettyPrint()
-//     ),
-//     transports: [new transports.Console()],
-// });
-// const logger = createLogger({
-//     transports: [
-//         new winston.transports.Console(),
-//         new winston.transports.File({ filename: 'combined.log' }),
-//     ],
-// });
-// export const consoleLog = () => {
-    // console.log('hit', payload);
-    // winston.log('info', "127.0.0.1 - there's no place like home");
-    // logger.log({
-    //     level: 'info',
-    //     message: 'What time is the testing at?',
-    // });
-// };
-// export const consoleInfo = payload => logger.log(payload);
+export const consoleLog = payload => logger.info(payload);
+export const consoleWarn = payload => logger.warn(payload);
+export const consoleError = payload => logger.error(payload);

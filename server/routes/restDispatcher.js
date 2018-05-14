@@ -3,10 +3,11 @@ import express from 'express';
 import userHandlers from '../controller/user_controller';
 import imageHandlers from '../controller/image_controller';
 import isLoggedIn from '../routes/restAuth';
+import { consoleLog } from '../utils/logging';
 
 const router = new express.Router();
 router.get('/', (req, res) => {
-    console.log('hello first');
+    consoleLog('first route hit');
     res.sendfile(path.join(__dirname, '../../client/index.html'));
 });
 

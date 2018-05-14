@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET, INVALID_PAYLOAD } from './../utils/constants';
+import { consoleError } from '../utils/logging';
 
 class UserHandlers {
     constructor() {
@@ -25,7 +26,7 @@ class UserHandlers {
                         cb('', { success: true, result: token, statusCode: 200 });
                     }
                 } else {
-                    console.log('error', err);
+                    consoleError(err);
                 }
             });
         }

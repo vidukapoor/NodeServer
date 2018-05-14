@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from './../utils/constants';
+import { consoleLog, consoleError } from '../utils/logging';
 /**
  *
  * @param {*} req
@@ -9,20 +10,20 @@ import { JWT_SECRET } from './../utils/constants';
  * //todo: need to check the session storage at login
  */
 function isLoggedIn(req, res, next) {     // jwt authentication
-  console.log('req.auth', req.body);
+  consoleLog(req.body);
   const { authToken } = req.body;
-  console.log(authToken);
+  consoleLog(authToken);
   // jwt.verify(authToken, JWT_SECRET, (err, decoded) => {
   //   console.log(decoded, err); // bar
   //   return next();
   // });
   try {
     const decoded = jwt.verify(authToken, JWT_SECRET);
-    console.log(decoded);
+    consoleLog(decoded);
     return next();
   } catch (err) {
     // err
-    console.log(err);
+    consoleError(err);
   }
   return res.status(401).json({ success: false, message: 'You are not authenticated' });
 }
